@@ -1,0 +1,14 @@
+services:
+  backend_postgres:
+    image: postgres:13-alpine
+    volumes:
+      - backend_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -d backend_db
+      retries: 3
+      timeout: 5s
+      interval: 10s
+    environment:
+      - POSTGRES_DB=backend_db
+      - POSTGRES_USER=backend_user
+      - POSTGRES_PASSWORD=backend_password
